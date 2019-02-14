@@ -1,57 +1,17 @@
-const inherits = require('util').inherits
-const Component = require('react').Component
-const h = require('react-hyperscript')
-const ReactMarkdown = require('react-markdown')
-const linker = require('extension-link-enabler')
-const findDOMNode = require('react-dom').findDOMNode
-
-module.exports = Notice
-
-inherits(Notice, Component)
-function Notice () {
-  Component.call(this)
-}
-
-Notice.prototype.render = function () {
-  const { notice, onConfirm } = this.props
-  const { title, date, body } = notice
-  const state = this.state || { disclaimerDisabled: true }
-  const disabled = state.disclaimerDisabled
-
-  return (
-    h('.flex-column.flex-center.flex-grow', {
-      style: {
-        width: '100%',
-      },
-    }, [
-      h('h3.flex-center.text-transform-uppercase.terms-header', {
-        style: {
-          background: '#EBEBEB',
-          color: '#AEAEAE',
-          width: '100%',
-          fontSize: '20px',
-          textAlign: 'center',
-          padding: 6,
-        },
-      }, [
-        title,
-      ]),
-
-      h('h5.flex-center.text-transform-uppercase.terms-header', {
-        style: {
-          background: '#EBEBEB',
-          color: '#AEAEAE',
-          marginBottom: 24,
-          width: '100%',
-          fontSize: '20px',
-          textAlign: 'center',
-          padding: 6,
-        },
-      }, [
-        date,
-      ]),
-
-      h('style', `
+const inherits=require('util').inherits
+const Component=require('react').Component
+const h=require('react-hyperscript')
+const ReactMarkdown=require('react-markdown')
+const linker=require('extension-link-enabler')
+const findDOMNode=require('react-dom').findDOMNode
+module.exports=Notice
+inherits(Notice,Component)
+function Notice(){Component.call(this)}
+Notice.prototype.render=function(){const{notice,onConfirm}=this.props
+const{title,date,body}=notice
+const state=this.state||{disclaimerDisabled:!0}
+const disabled=state.disclaimerDisabled
+return(h('.flex-column.flex-center.flex-grow',{style:{width:'100%',},},[h('h3.flex-center.text-transform-uppercase.terms-header',{style:{background:'#EBEBEB',color:'#AEAEAE',width:'100%',fontSize:'20px',textAlign:'center',padding:6,},},[title,]),h('h5.flex-center.text-transform-uppercase.terms-header',{style:{background:'#EBEBEB',color:'#AEAEAE',marginBottom:24,width:'100%',fontSize:'20px',textAlign:'center',padding:6,},},[date,]),h('style',`
 
         .markdown {
           overflow-x: hidden;
@@ -77,56 +37,11 @@ Notice.prototype.render = function () {
           color: #4fb858;
         }
 
-      `),
-
-      h('div.markdown', {
-        onScroll: (e) => {
-          var object = e.currentTarget
-          if (object.offsetHeight + object.scrollTop + 100 >= object.scrollHeight) {
-            this.setState({disclaimerDisabled: false})
-          }
-        },
-        style: {
-          background: 'rgb(235, 235, 235)',
-          height: '310px',
-          padding: '6px',
-          width: '90%',
-          overflowY: 'scroll',
-          scroll: 'auto',
-        },
-      }, [
-        h(ReactMarkdown, {
-          className: 'notice-box',
-          source: body,
-          skipHtml: true,
-        }),
-      ]),
-
-      h('button', {
-        disabled,
-        onClick: () => {
-          this.setState({disclaimerDisabled: true})
-          onConfirm()
-        },
-        style: {
-          marginTop: '18px',
-        },
-      }, 'Accept'),
-    ])
-  )
-}
-
-Notice.prototype.componentDidMount = function () {
-  // eslint-disable-next-line react/no-find-dom-node
-  var node = findDOMNode(this)
-  linker.setupListener(node)
-  if (document.getElementsByClassName('notice-box')[0].clientHeight < 310) {
-    this.setState({disclaimerDisabled: false})
-  }
-}
-
-Notice.prototype.componentWillUnmount = function () {
-  // eslint-disable-next-line react/no-find-dom-node
-  var node = findDOMNode(this)
-  linker.teardownListener(node)
-}
+      `),h('div.markdown',{onScroll:(e)=>{var object=e.currentTarget
+if(object.offsetHeight+object.scrollTop+100>=object.scrollHeight){this.setState({disclaimerDisabled:!1})}},style:{background:'rgb(235, 235, 235)',height:'310px',padding:'6px',width:'90%',overflowY:'scroll',scroll:'auto',},},[h(ReactMarkdown,{className:'notice-box',source:body,skipHtml:!0,}),]),h('button',{disabled,onClick:()=>{this.setState({disclaimerDisabled:!0})
+onConfirm()},style:{marginTop:'18px',},},'Accept'),]))}
+Notice.prototype.componentDidMount=function(){var node=findDOMNode(this)
+linker.setupListener(node)
+if(document.getElementsByClassName('notice-box')[0].clientHeight<310){this.setState({disclaimerDisabled:!1})}}
+Notice.prototype.componentWillUnmount=function(){var node=findDOMNode(this)
+linker.teardownListener(node)}
