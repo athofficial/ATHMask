@@ -191,7 +191,7 @@
     "gulp-zip": "^4.0.0",
     "gulp-eslint": "^4.0.0",
     "isomorphic-fetch": "^2.2.1",
-    "jsdom": "^11.1.0",
+    "jsdom": "^16.5.0",
     "jsdom-global": "^3.0.2",
     "jshint-stylish": "~2.2.1",
     "karma": "^1.7.1",
